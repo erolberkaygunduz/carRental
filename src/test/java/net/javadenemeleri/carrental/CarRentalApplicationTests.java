@@ -23,35 +23,30 @@ class CarRentalApplicationTests {
 
     @Test
     void testPastDateReservation() {
-        assertThrows(InvalidReservationException.class, () -> {
-            new Reservation(
-                CarType.SEDAN,
-                LocalDateTime.now().minusDays(1),
-                3
-            );
-        }, "Old date reservation should throw InvalidReservationException");
+        assertThrows(InvalidReservationException.class, () -> new Reservation(
+            CarType.SEDAN,
+            LocalDateTime.now().minusDays(1),
+            3
+        ), "Old date reservation should throw InvalidReservationException");
     }
 
     @Test
     void testNullCarType() {
-        assertThrows(InvalidReservationException.class, () -> {
-            new Reservation(
+        assertThrows(InvalidReservationException.class, () -> new Reservation(
                 null,
                 LocalDateTime.now().plusDays(5),
                 3
-            );
-        }, "null car type should throw InvalidReservationException");
+            ),"null car type should throw InvalidReservationException");
     }
 
     @Test
     void testInvalidDayTime() {
-        assertThrows(InvalidReservationException.class, () -> {
+        assertThrows(InvalidReservationException.class, () ->
             new Reservation(
                 CarType.SUV,
                 LocalDateTime.now().plusDays(2),
                 0
-            );
-        }, "0 or negative day time should throw InvalidReservationException");
+            ), "0 or negative day time should throw InvalidReservationException");
     }
 
     @Test
