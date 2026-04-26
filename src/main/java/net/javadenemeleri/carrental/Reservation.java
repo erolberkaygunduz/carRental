@@ -4,23 +4,23 @@ import java.time.LocalDateTime;
 
 public class Reservation {
 
-    private CarType carType;
+    private Car car;
     private LocalDateTime startDate;
     private int dayTime;
 
     public Reservation() {
     }
 
-    public Reservation(CarType carType, LocalDateTime startDate, int dayTime) throws InvalidReservationException {
-        validate(carType, startDate, dayTime);
-        this.carType = carType;
+    public Reservation(Car car, LocalDateTime startDate, int dayTime) throws InvalidReservationException {
+        validate(car, startDate, dayTime);
+        this.car = car;
         this.startDate = startDate;
         this.dayTime = dayTime;
     }
 
-    private void validate(CarType carType, LocalDateTime startDate, int dayTime) throws InvalidReservationException {
-        if (carType == null) {
-            throw new InvalidReservationException("carType cannot be null!");
+    private void validate(Car car, LocalDateTime startDate, int dayTime) throws InvalidReservationException {
+        if (car == null) {
+            throw new InvalidReservationException("car cannot be null!");
         }
 
         if (startDate == null) {
@@ -37,15 +37,15 @@ public class Reservation {
         }
     }
 
-    public CarType getCarType() {
-        return carType;
+    public Car getCar() {
+        return car;
     }
 
-    public void setCarType(CarType carType) throws InvalidReservationException {
-        if (carType == null) {
-            throw new InvalidReservationException("carType cannot be null!");
+    public void setCar(Car car) throws InvalidReservationException {
+        if (car == null) {
+            throw new InvalidReservationException("car cannot be null!");
         }
-        this.carType = carType;
+        this.car = car;
     }
 
     public LocalDateTime getStartDate() {
@@ -72,5 +72,10 @@ public class Reservation {
             throw new InvalidReservationException("dayTime must be greater than 0!");
         }
         this.dayTime = dayTime;
+    }
+
+    // Convenience method to get CarType
+    public String getCarType() {
+        return car != null ? car.getType() : null;
     }
 }
